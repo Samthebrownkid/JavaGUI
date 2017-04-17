@@ -15,26 +15,34 @@ public class GUIDemo extends JFrame
     private JPanel panel;
     private JButton biggerButton;
     private JButton smallerButton;
-
+    private JButton widerButton;
+    private JButton tallerButton;
+    
     /**
      * Set up the application.
      */
     public GUIDemo()
     {
-  		setTitle("Bigger/Smaller");
+        setTitle("Bigger/Smaller");
         setSize(200, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
         biggerButton = new JButton("BIGGER");
         smallerButton = new JButton("SMALLER");
+        widerButton = new JButton("WIDER");
+        tallerButton = new JButton("TALLER");
         biggerButton.addActionListener(new ButtonHandler());
         smallerButton.addActionListener(new ButtonHandler());
+        widerButton.addActionListener(new ButtonHandler());
+        tallerButton.addActionListener(new ButtonHandler());
         add(panel);
         panel.add(biggerButton);
         panel.add(smallerButton);
+        panel.add(widerButton);
+        panel.add(tallerButton);
         setVisible(true);
     }
-
+    
     /**
      * This inner class exists to handle button events. There are other ways
      * this could have been done:
@@ -44,23 +52,31 @@ public class GUIDemo extends JFrame
      */
     private class ButtonHandler implements ActionListener
     {
-
+        
         public void actionPerformed(ActionEvent e)
         {
             Dimension size = getSize();
-
+            
             if (e.getSource().equals(biggerButton))
             {
                 setSize(size.width + 10, size.height + 10);
             }
-            else
+            if (e.getSource().equals(widerButton)) 
+            {
+                setSize(size.width + 20, size.height);
+            }
+            if (e.getSource().equals(tallerButton)) 
+            {
+                setSize(size.width, size.height + 20);
+            }
+            if (e.getSource().equals(smallerButton))
             {
                 setSize(size.width - 10, size.height - 10);
             }
-
+            
         }
     }
-
+    
     /**
      * Start the app by creating a GUIDemo object.
      */
